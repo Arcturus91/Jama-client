@@ -14,8 +14,11 @@ interface User {
 const Users: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
 
+  const URL = import.meta.env.VITE_API;
+  const API = `${URL}/api`;
+
   const fetchUsers = () => {
-    fetch("http://localhost:5005/api/findusers")
+    fetch(`${API}/findusers`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
