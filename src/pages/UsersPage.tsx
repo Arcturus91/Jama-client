@@ -14,7 +14,7 @@ interface User {
 const Users: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
 
-  const URL = import.meta.env.VITE_API;
+  const URL = import.meta.env.VITE_API || "http://localhost:5005";
   const API = `${URL}/api`;
 
   const fetchUsers = () => {
