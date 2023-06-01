@@ -18,7 +18,10 @@ const Users: React.FC = () => {
   const API = `${URL}/api`;
 
   const fetchUsers = () => {
-    fetch(`${API}/findusers`)
+    fetch(`${API}/findusers`, {
+      method: "GET",
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

@@ -11,7 +11,10 @@ const Meals: React.FC = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5005/api/availablemeals")
+    fetch("http://localhost:5005/api/availablemeals", {
+      method: "GET",
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
