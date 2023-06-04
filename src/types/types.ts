@@ -40,3 +40,15 @@ interface Meal {
     createdAt: string;
     updatedAt: string;
 }
+
+interface User {
+    email: string;
+    password: string;
+    type: string;
+    profileImageUrl: string | null;
+    phoneNumber: string | null;
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    address: string;
+}

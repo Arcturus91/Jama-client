@@ -15,7 +15,6 @@ const Home: React.FC = () => {
       >
         Browse Meals
       </Link>
-      <SignUpForm />
     </div>
   );
 };

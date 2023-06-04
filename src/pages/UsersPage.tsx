@@ -16,7 +16,7 @@ const Users: React.FC = () => {
 
   const URL = import.meta.env.VITE_API || "http://localhost:5005";
   const API = `${URL}/api`;
-
+  //TODO:CHANGE FETCH METHOD
   const fetchUsers = () => {
     fetch(`${API}/findusers`, {
       method: "GET",

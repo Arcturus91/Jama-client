@@ -27,5 +27,13 @@ export async function signupWs(
 }
 
 //logout
-export const logoutWs = () =>
-  api.get("/auth/logout").then(successStatus).catch(internalServerError);
+export async function logoutWs(): Promise<
+  SuccessResponse | ServerErrorResponse
+> {
+  try {
+    const response = await api.post("/auth/logout");
+    return successStatus(response);
+  } catch (error: unknown) {
+    return internalServerError(error as ErrorResponse);
+  }
+}

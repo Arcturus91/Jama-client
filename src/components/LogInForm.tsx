@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { signupWs } from "../services/auth-ws";
+import { signupWs, loginWs } from "../services/auth-ws";
 import { useNavigate } from "react-router-dom";
 
-const SignUpForm: React.FC = (props) => {
+const LogInForm: React.FC = (props) => {
   const [formData, setFormData] = useState<SignInFormData>({
     email: "",
     password: "",
@@ -23,7 +23,8 @@ const SignUpForm: React.FC = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await signupWs(formData);
+    const response = await loginWs(formData);
+    console.log(response, "from loginform");
     if (response.status && "data" in response) {
       props.authentication(response.data);
       console.log("signup", props, response);
@@ -105,4 +106,4 @@ const SignUpForm: React.FC = (props) => {
   );
 };
 
-export default SignUpForm;
+export default LogInForm;
