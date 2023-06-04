@@ -7,7 +7,7 @@ const routes = () => {
       element: <HomePage />,
     },
     {
-      path: "/meals",
+      path: "/availablemeals",
       element: <MealsPage />,
     },
     {

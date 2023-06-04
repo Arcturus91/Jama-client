@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios";
 //login
 export async function loginWs(
   data: LogInFormData
-): Promise<SuccessResponse | serverErrorResponse> {
+): Promise<SuccessResponse | ServerErrorResponse> {
   try {
     const response = await api.post("/auth/login/user", data);
     return successStatus(response);
@@ -17,7 +17,7 @@ export async function loginWs(
 //signup
 export async function signupWs(
   data: SignInFormData
-): Promise<SuccessResponse | serverErrorResponse> {
+): Promise<SuccessResponse | ServerErrorResponse> {
   try {
     const response = await api.post("/auth/signup/user", data);
     return successStatus(response);

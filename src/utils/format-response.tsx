@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-export function internalServerError(err: ErrorResponse) {
+export function internalServerError(err: ErrorResponse): ServerErrorResponse {
   if (err.response?.data?.errorMessage) {
     return {
       status: false,

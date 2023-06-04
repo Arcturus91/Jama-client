@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { signupWs } from "../services/auth-ws";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm: React.FC = () => {
   const [formData, setFormData] = useState<SignInFormData>({
@@ -7,88 +8,96 @@ const SignUpForm: React.FC = () => {
     password: "",
     type: "",
   });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
   };
 
+  const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const response = await signupWs(formData);
-
-      console.log("post response from server", response);
-    } catch (error) {
-      console.error(error);
+    const response = await signupWs(formData);
+    if (response.status) {
+      navigate("/availablemeals");
+    }
+    if ("errorMessage" in response) {
+      setErrorMessage(response.errorMessage);
+    } else {
+      setErrorMessage(null);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen color">
       <form
+        className="space-y-4 border border-gray-300 bg-white p-6 rounded-md"
         onSubmit={handleSubmit}
-        className="max-w-md w-full p-6 bg-white rounded shadow-lg"
       >
-        <h2 className="text-2xl font-bold mb-6">Signup</h2>
-
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
             Email
           </label>
           <input
-            type="email"
             id="email"
             name="email"
-            value={formData.email}
+            type="email"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-400"
-            required
+            value={formData.email}
           />
         </div>
-
-        <div className="mb-4">
+        <div>
           <label
             htmlFor="password"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-sm font-medium text-gray-700"
           >
             Password
           </label>
           <input
-            type="password"
             id="password"
             name="password"
-            value={formData.password}
+            type="password"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-400"
-            required
+            value={formData.password}
           />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
+        <div>
+          <label
+            htmlFor="type"
+            className="block text-sm font-medium text-gray-700"
+          >
             Type
           </label>
-          <input
-            type="text"
+          <select
             id="type"
             name="type"
-            value={formData.type}
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-400"
-            required
-          />
+            value={formData.type}
+          >
+            <option value="">Select type...</option>
+            <option value="user">User</option>
+            <option value="chef">Chef</option>
+          </select>
         </div>
-
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Sign up
+          Submit
         </button>
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
       </form>
     </div>
   );

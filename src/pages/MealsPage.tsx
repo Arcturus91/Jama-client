@@ -1,47 +1,52 @@
 import React, { useState, useEffect } from "react";
-
-interface Meal {
-  id: number;
-  name: string;
-  description: string;
-  imageUrl: string;
-}
+import { getAvailableMealsWs } from "../services/meals-ws";
 
 const Meals: React.FC = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5005/api/availablemeals", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setMeals(data))
-      .catch((error) => console.error("Error:", error));
+    const fetchMeals = async () => {
+      return await getAvailableMealsWs();
+    };
+
+    const fetchData = async () => {
+      const response = await fetchMeals();
+      console.log(response);
+
+      if (response.status && "data" in response) {
+        setMeals(response.data as Meal[]);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Available Meals</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {meals.map((meal) => (
-          <div key={meal.id} className="border rounded-lg overflow-hidden">
-            <img
-              src={meal.imageUrl}
-              alt={meal.name}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-4">
-              <h2 className="font-bold text-lg mb-2">{meal.name}</h2>
-              <p>{meal.description}</p>
-            </div>
-          </div>
-        ))}
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold mb-4">Available Meals</h2>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {meals
+            .filter((meal) => meal.isAvailable)
+            .map((meal) => (
+              <div key={meal.id} className="group">
+                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                  <img
+                    src={meal.imageUrl}
+                    alt={meal.name}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <h3 className="mt-4 text-sm text-gray-700">{meal.name}</h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  ${meal.price.toFixed(2)}
+                </p>
+                <p className="text-gray-700">
+                  Available amount: {meal.availableAmount}
+                </p>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
