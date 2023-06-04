@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { signupWs } from "../services/auth-ws";
 
 const SignUpForm: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SignInFormData>({
     email: "",
     password: "",
     type: "",

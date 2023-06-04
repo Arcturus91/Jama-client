@@ -1,4 +1,6 @@
-export function internalServerError(err) {
+import { AxiosResponse } from "axios";
+
+export function internalServerError(err: ErrorResponse) {
   if (err.response?.data?.errorMessage) {
     return {
       status: false,
@@ -11,7 +13,7 @@ export function internalServerError(err) {
   };
 }
 
-export function successStatus(res) {
+export function successStatus<T>(res: AxiosResponse<T>) {
   console.log("response from server", res);
   return {
     status: true,
