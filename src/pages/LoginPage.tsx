@@ -1,6 +1,8 @@
 import React from "react";
 import { LogInForm } from "../components";
 
-export const LoginPage = (props) => {
+const LoginPage: React.FC = (props) => {
   return <LogInForm {...props} />;
 };
+
+export default LoginPage;

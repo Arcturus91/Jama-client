@@ -1,6 +1,5 @@
 import { api } from "./api";
 import { successStatus, internalServerError } from "../utils/format-response";
-import { AxiosResponse } from "axios";
 
 //login
 export async function loginWs(

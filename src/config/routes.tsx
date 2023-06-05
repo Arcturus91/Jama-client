@@ -1,6 +1,6 @@
-import { HomePage, MealsPage, UsersPage } from "../pages";
-import { LoginPage } from "../pages/LoginPage";
-import { SignUpPage } from "../pages/SignUpPage";
+import { HomePage, LoginPage, MealsPage, UsersPage } from "../pages";
+import MealDetailPage from "../pages/MealDetailPage";
+import SignUpPage from "../pages/SignUpPage";
 
 const routes = (props) => {
   return [
@@ -18,6 +18,10 @@ const routes = (props) => {
     },
     { path: "/login", element: <LoginPage {...props} /> },
     { path: "/signup", element: <SignUpPage {...props} /> },
+    {
+      path: "/availablemeals/:id",
+      element: <MealDetailPage {...props} />,
+    },
   ];
 };
 

@@ -1,5 +1,7 @@
 import { SignUpForm } from "../components";
 
-export const SignUpPage = (props) => {
+const SignUpPage: React.FC = (props) => {
   return <SignUpForm {...props} />;
 };
+
+export default SignUpPage;

@@ -10,7 +10,7 @@ const Home: React.FC = () => {
         Discover the best meals prepared by top chefs!
       </p>
       <Link
-        to="/meals"
+        to="/availablemeals"
         className="bg-white text-blue-500 px-6 py-3 rounded-lg text-lg font-bold hover:bg-blue-200"
       >
         Browse Meals

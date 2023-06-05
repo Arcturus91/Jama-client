@@ -52,3 +52,14 @@ interface User {
     updatedAt: string;
     address: string;
 }
+
+interface MealDetail extends Meal {
+    chef: {
+        name: string;
+        address: string;
+    };
+}
+
+interface MealDetailProps {
+    id: string;
+}
