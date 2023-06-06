@@ -42,6 +42,9 @@ const SignUpForm: React.FC = (props) => {
         className="space-y-4 border border-gray-300 bg-white p-6 rounded-md"
         onSubmit={handleSubmit}
       >
+        <h1 className="text-2xl font-bold text-center mb-4">
+          Porfavor regístrate para continuar
+        </h1>
         <div>
           <label
             htmlFor="email"

@@ -63,3 +63,18 @@ interface MealDetail extends Meal {
 interface MealDetailProps {
     id: string;
 }
+
+interface Chef {
+    id: string;
+    email: string;
+    profileImageUrl: string | null;
+    phoneNumber: string | null;
+    createdAt: string;
+    updatedAt: string;
+    bio: string | null;
+    rating: number;
+    totalRatings: number;
+    address: string;
+    type: string;
+    meals: Meal[]
+}

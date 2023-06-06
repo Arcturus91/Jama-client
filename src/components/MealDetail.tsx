@@ -4,13 +4,13 @@ import axios from "axios";
 import { getMealDetailWs } from "../services/meals-ws";
 
 const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
-  const [mealDetail, setmMalDetail] = useState<MealDetail | null>(null);
+  const [mealDetail, setMealDetail] = useState<MealDetail | null>(null);
 
   useEffect(() => {
     const fetchMealDetail = async () => {
       const response = await getMealDetailWs(id);
       if (response.status && "data" in response) {
-        setmMalDetail(response.data as MealDetail);
+        setMealDetail(response.data as MealDetail);
       }
     };
 

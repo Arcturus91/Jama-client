@@ -7,7 +7,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = (props) => {
-  console.log("navbar props", props);
+  const { user } = props;
+  console.log(user);
   return (
     <nav className="bg-white shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
               </div>
             </div>
           </div>
-          {!props.user ? (
+          {!user ? (
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
                 <Link
@@ -62,6 +63,25 @@ const Navbar: React.FC<NavbarProps> = (props) => {
           ) : (
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
+                <span className="text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
+                  Bienvenido {user.type}: {user.email}
+                </span>
+                {user.type === "user" && (
+                  <Link
+                    to="/userpage"
+                    className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    User Page 😎
+                  </Link>
+                )}
+                {user.type === "chef" && (
+                  <Link
+                    to={`/chefpage/${user.id}`}
+                    className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Chef Page 👨‍🍳
+                  </Link>
+                )}
                 <Link
                   to="/"
                   onClick={() => {

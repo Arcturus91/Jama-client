@@ -1,4 +1,10 @@
-import { HomePage, LoginPage, MealsPage, UsersPage } from "../pages";
+import {
+  ChefPage,
+  HomePage,
+  LoginPage,
+  MealsPage,
+  UpdateChefPage,
+} from "../pages";
 import MealDetailPage from "../pages/MealDetailPage";
 import SignUpPage from "../pages/SignUpPage";
 
@@ -12,15 +18,16 @@ const routes = (props) => {
       path: "/availablemeals",
       element: <MealsPage {...props} />,
     },
-    {
-      path: "/users",
-      element: <UsersPage {...props} />,
-    },
     { path: "/login", element: <LoginPage {...props} /> },
     { path: "/signup", element: <SignUpPage {...props} /> },
     {
       path: "/availablemeals/:id",
       element: <MealDetailPage {...props} />,
+    },
+    { path: "/updateprofile", element: <UpdateChefPage {...props} /> },
+    {
+      path: "/chefpage/:id",
+      element: <ChefPage {...props} />,
     },
   ];
 };
@@ -33,7 +40,5 @@ export default routes;
         <Link to="/users" className="mr-4">
           Users
         </Link>
-        <Link to="/chefs" className="mr-4">
-          Chefs
-        </Link>
+
         <Link to="/meals">Meals</Link> */
