@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getAvailableMealsWs } from "../services/meals-ws";
-import { Link } from "react-router-dom";
 import { MealsList } from "../components";
 
 const MealsPage: React.FC<AuthenticationProps> = (props) => {
