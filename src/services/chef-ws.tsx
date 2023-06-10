@@ -3,7 +3,7 @@ import { api } from "./api";
 
 export async function getChefDetailWs(
   chefId: string
-): Promise<SuccessResponse | ServerErrorResponse> {
+): Promise<SuccessResponse<Chef> | ServerErrorResponse> {
   try {
     const response = await api.get(`/chef/${chefId}`);
     return successStatus(response);

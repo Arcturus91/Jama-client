@@ -2,7 +2,7 @@ import { internalServerError, successStatus } from "../utils/format-response";
 import { api } from "./api";
 
 export async function getAvailableMealsWs(): Promise<
-  SuccessResponse | ServerErrorResponse
+  SuccessResponse<[Meal]> | ServerErrorResponse
 > {
   try {
     const response = await api.get("/availablemeals");
@@ -14,7 +14,7 @@ export async function getAvailableMealsWs(): Promise<
 
 export async function getMealDetailWs(
   mealId: string
-): Promise<SuccessResponse | ServerErrorResponse> {
+): Promise<SuccessResponse<Meal> | ServerErrorResponse> {
   try {
     const response = await api.get(`/availablemeals/${mealId}`);
     return successStatus(response);
@@ -25,13 +25,13 @@ export async function getMealDetailWs(
 
 export async function createMealWs(
   data: Partial<Meal>
-): Promise<SuccessResponse | ServerErrorResponse> {
+): Promise<SuccessResponse<Meal> | ServerErrorResponse> {
   try {
-    const response = await api.post("/chef/createmeal", data);
+    const response = await api.post<Meal>("/chef/createmeal", data);
     console.log("meal ws", response);
     return successStatus(response);
-  } catch (error: unknown) {
+  } catch (error) {
     console.log(error);
-    return internalServerError(error as ErrorResponse);
+    return internalServerError(error);
   }
 }

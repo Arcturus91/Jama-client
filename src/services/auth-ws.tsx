@@ -4,7 +4,7 @@ import { successStatus, internalServerError } from "../utils/format-response";
 //login
 export async function loginWs(
   data: LogInFormData
-): Promise<SuccessResponse | ServerErrorResponse> {
+): Promise<SuccessResponse<Partial<User | Chef>> | ServerErrorResponse> {
   console.log("data", data);
   try {
     const response = await api.post("/auth/login/user", data);
@@ -18,7 +18,7 @@ export async function loginWs(
 //signup
 export async function signupWs(
   data: SignInFormData
-): Promise<SuccessResponse | ServerErrorResponse> {
+): Promise<SuccessResponse<Partial<User | Chef>> | ServerErrorResponse> {
   try {
     const response = await api.post("/auth/signup/user", data);
     return successStatus(response);
@@ -27,13 +27,20 @@ export async function signupWs(
   }
 }
 
-//logout
+interface SuccessLogOutResponse {
+  status: true;
+  message: string;
+}
+
 export async function logoutWs(): Promise<
-  SuccessResponse | ServerErrorResponse
+  SuccessLogOutResponse | ServerErrorResponse
 > {
   try {
     const response = await api.post("/auth/logout");
-    return successStatus(response);
+    return {
+      status: true,
+      message: response.data || "Logged out successfully",
+    };
   } catch (error: unknown) {
     return internalServerError(error as ErrorResponse);
   }

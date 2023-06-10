@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { getChefDetailWs, updateChefWs } from "../services/chef-ws";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-/* interface ChefUpdateProps {
-  id: string;
-  email: string;
-  profileImageUrl: string | null;
-  phoneNumber: string | null;
-  bio: string | null;
-  address: string;
-} */
-
-const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
-  const id = props.user.id;
+const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
+  const { id } = user as Chef;
   const [chef, setChef] = useState<Chef | null>(null);
   const navigate = useNavigate();
 
@@ -38,7 +28,7 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
     address: chef?.address,
   });
 
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -55,13 +45,14 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
 
       if (response.status) {
         navigate(`/chefpage/${id}`);
-
-        setErrorMessage(null);
+      } else {
+        setErrorMessage(response.errorMessage || "Error updating chef profile");
       }
-
-      //redirect to chef page
     } catch (error) {
-      setErrorMessage("Error updating chef profile");
+      console.log("Error in updateChefWs:", error);
+      setErrorMessage(
+        "An unexpected error occurred while updating the chef profile."
+      );
     }
   };
 
@@ -87,7 +78,7 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
             type="text"
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            value={formData.profileImageUrl}
+            value={formData.profileImageUrl as string}
           />
         </div>
         <div>
@@ -103,7 +94,7 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
             type="text"
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            value={formData.phoneNumber}
+            value={formData.phoneNumber as string}
           />
         </div>
         <div>
@@ -119,7 +110,7 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
             type="text"
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            value={formData.bio}
+            value={formData.bio as string}
           />
         </div>
         <div>
@@ -144,7 +135,7 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
         >
           Update
         </button>
-        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+        {<div className="text-red-500">{errorMessage}</div>}
       </form>
     </div>
   );

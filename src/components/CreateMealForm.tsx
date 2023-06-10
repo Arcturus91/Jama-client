@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMealWs } from "../services/meals-ws";
 
-const CreateMealForm: React.FC = (props) => {
-  const id = props.user.id;
+const CreateMealForm: React.FC<AuthenticationProps> = ({ user }) => {
+  const { id } = user as Chef;
   const [formData, setFormData] = useState<Partial<Meal>>({
     name: "",
     price: 0,
@@ -25,16 +25,19 @@ const CreateMealForm: React.FC = (props) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await createMealWs(formData);
-    console.log("response in create meal", response);
-    if (response.status) {
-      navigate(`/chefpage/${id}`);
-      setErrorMessage(null);
-    }
-    if (response.errorMessage) {
-      setErrorMessage(response.errorMessage);
-    } else {
-      setErrorMessage(null);
+    try {
+      const response = await createMealWs(formData);
+      console.log("response in create meal", response);
+
+      if (response.status) {
+        navigate(`/chefpage/${id}`);
+        setErrorMessage(null);
+      } else {
+        setErrorMessage(response.errorMessage || "Unknown error occurred");
+      }
+    } catch (error) {
+      console.log("Error in createMealWs:", error);
+      setErrorMessage("An error occurred while creating the meal.");
     }
   };
 

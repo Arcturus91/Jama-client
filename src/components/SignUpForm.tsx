@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signupWs } from "../services/auth-ws";
 import { useNavigate } from "react-router-dom";
 
-const SignUpForm: React.FC = (props) => {
+const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
   const [formData, setFormData] = useState<SignInFormData>({
     email: "",
     password: "",
@@ -25,8 +25,8 @@ const SignUpForm: React.FC = (props) => {
 
     const response = await signupWs(formData);
     if (response.status && "data" in response) {
-      props.authentication(response.data);
-      console.log("signup", props, response);
+      authentication(response.data);
+      console.log("signup", response);
       navigate("/availablemeals");
     }
     if ("errorMessage" in response) {

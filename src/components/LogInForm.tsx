@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { signupWs, loginWs } from "../services/auth-ws";
+import { loginWs } from "../services/auth-ws";
 import { useNavigate } from "react-router-dom";
 
-const LogInForm: React.FC = (props) => {
+const LogInForm: React.FC<AuthenticationProps> = ({ authentication }) => {
   const [formData, setFormData] = useState<SignInFormData>({
     email: "",
     password: "",
@@ -26,8 +26,8 @@ const LogInForm: React.FC = (props) => {
     const response = await loginWs(formData);
     console.log(response, "from loginform");
     if (response.status && "data" in response) {
-      props.authentication(response.data);
-      console.log("signup", props, response);
+      authentication(response.data);
+      console.log("signup", response);
       navigate("/availablemeals");
     }
     if ("errorMessage" in response) {

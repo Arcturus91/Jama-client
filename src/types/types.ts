@@ -18,10 +18,10 @@ interface ErrorResponse {
     };
 }
 
-type SuccessResponse = {
-    status: boolean;
-    data: object | Array<object>;
-};
+interface SuccessResponse<T> {
+    status: true;
+    data: T;
+}
 
 type ServerErrorResponse = {
     status: boolean;
@@ -53,6 +53,16 @@ interface User {
     address: string;
 }
 
+
+interface AuthenticationProps {
+    user: User | Chef | null;
+    authentication: (user: Partial<User | Chef> | null) => void;
+}
+
+interface ChefUpdateProps {
+    user: Chef
+}
+
 interface MealDetail extends Meal {
     chef: {
         name: string;
@@ -67,6 +77,7 @@ interface MealDetailProps {
 interface Chef {
     id: string;
     email: string;
+    password: string;
     profileImageUrl: string | null;
     phoneNumber: string | null;
     createdAt: string;
@@ -77,4 +88,9 @@ interface Chef {
     address: string;
     type: string;
     meals: Meal[]
+}
+
+interface NavbarProps {
+    user: User | Chef | null;
+    handleLogout: () => void;
 }

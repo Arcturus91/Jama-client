@@ -3,11 +3,7 @@ import { getAvailableMealsWs } from "../services/meals-ws";
 import { Link } from "react-router-dom";
 import { MealsList } from "../components";
 
-interface MealsPageProps {
-  user: User | null;
-}
-
-const MealsPage: React.FC<MealsPageProps> = (props) => {
+const MealsPage: React.FC<AuthenticationProps> = (props) => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const { user } = props;
 

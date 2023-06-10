@@ -1,11 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface NavbarProps {
-  user: User;
-  handleLogout: () => void;
-}
-
 const Navbar: React.FC<NavbarProps> = (props) => {
   const { user } = props;
   console.log(user);

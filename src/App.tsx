@@ -5,24 +5,23 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { logoutWs } from "./services/auth-ws";
 
 const App = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | Chef | null>(null);
 
   const navigate = useNavigate();
-  function authentication(user: User) {
-    console.log("auth function", user);
-    setUser(user);
+  function authentication(user: Partial<User | Chef> | null) {
+    setUser(user as User | Chef | null);
   }
 
   async function handleLogout() {
     console.log("logged out");
     const res = await logoutWs();
-    const { data, status, errorMessage } = res;
 
-    if (status) {
+    if (res.status) {
+      console.log(res);
       navigate("/");
       setUser(null);
     } else {
-      alert(errorMessage);
+      alert(res.errorMessage);
     }
   }
 

@@ -1,19 +1,17 @@
 import { AxiosResponse } from "axios";
 
-export function internalServerError(err: ErrorResponse): ServerErrorResponse {
-  if (err.response?.data?.errorMessage) {
-    return {
-      status: false,
-      errorMessage: err.response.data.errorMessage,
-    };
-  }
+export function internalServerError(error: unknown): ServerErrorResponse {
+  const err = error as ErrorResponse;
+  const errorMessage =
+    err?.response?.data?.errorMessage ||
+    "Internal server error. Please check your server";
   return {
     status: false,
-    errorMessage: "Internal server error. Please check your server",
+    errorMessage,
   };
 }
 
-export function successStatus<T>(res: AxiosResponse<T>) {
+export function successStatus<T>(res: AxiosResponse<T>): SuccessResponse<T> {
   console.log("response from server", res);
   return {
     status: true,

@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 import { MealsList } from "../components";
 import { getChefDetailWs } from "../services/chef-ws";
 
-interface RouteParams {
-  id: string;
-}
-
-const ChefPage: React.FC = (props) => {
+const ChefPage: React.FC<AuthenticationProps> = (props) => {
   const { user } = props;
   const { id } = useParams<{ id: string }>();
   console.log("chef page", props);

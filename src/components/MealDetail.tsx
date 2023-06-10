@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import { getMealDetailWs } from "../services/meals-ws";
 
 const MealDetail: React.FC<MealDetailProps> = ({ id }) => {

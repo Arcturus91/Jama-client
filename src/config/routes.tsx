@@ -9,7 +9,12 @@ import {
 import MealDetailPage from "../pages/MealDetailPage";
 import SignUpPage from "../pages/SignUpPage";
 
-const routes = (props) => {
+interface RoutesProps {
+  user: User | Chef | null;
+  authentication: (user: Partial<User | Chef> | null) => void;
+}
+
+const routes = (props: RoutesProps) => {
   return [
     {
       path: "/",
