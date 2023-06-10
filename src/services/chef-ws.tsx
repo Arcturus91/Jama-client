@@ -11,3 +11,12 @@ export async function getChefDetailWs(
     return internalServerError(error as ErrorResponse);
   }
 }
+
+export async function updateChefWs(chefId: string, updateData: Partial<Chef>) {
+  try {
+    const response = await api.put(`/chef/updatechef/${chefId}`, updateData);
+    return successStatus(response);
+  } catch (error: unknown) {
+    return internalServerError(error as ErrorResponse);
+  }
+}

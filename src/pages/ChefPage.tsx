@@ -20,6 +20,7 @@ const ChefPage: React.FC = (props) => {
         const response = await getChefDetailWs(id as string);
         if (response.status && "data" in response) {
           setChef(response.data);
+          console.log("useState from chef pafge", chef);
         }
       } catch (err) {
         console.error(err);
@@ -64,10 +65,16 @@ const ChefPage: React.FC = (props) => {
                   Phone: {chef.phoneNumber || "No phone number"}
                 </span>
                 <Link
-                  to="/updateprofile"
-                  className="mt-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  to="/chef/updateprofile"
+                  className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
-                  Update Profile
+                  Actualiza tu perfil
+                </Link>
+                <Link
+                  to="/chef/createmeal"
+                  className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Registra un platillo
                 </Link>
               </div>
             </div>

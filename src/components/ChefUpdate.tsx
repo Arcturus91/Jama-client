@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getChefDetailWs, updateChefWs } from "../services/chef-ws";
+import { redirect, useNavigate } from "react-router-dom";
 
 /* interface ChefUpdateProps {
   id: string;
@@ -11,12 +13,29 @@ import axios from "axios";
 } */
 
 const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
+  const id = props.user.id;
+  const [chef, setChef] = useState<Chef | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchChefData = async () => {
+      try {
+        const response = await getChefDetailWs(id as string);
+        if (response.status && "data" in response) {
+          setChef(response.data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchChefData();
+  }, [id]);
+
   const [formData, setFormData] = useState({
-    email: "",
-    profileImageUrl: "",
-    phoneNumber: "",
-    bio: "",
-    address: "",
+    profileImageUrl: chef?.profileImageUrl,
+    phoneNumber: chef?.phoneNumber,
+    bio: chef?.bio,
+    address: chef?.address,
   });
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -31,11 +50,15 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post(
-        `http://localhost:5005/api/chef/updatechef/${id}`,
-        formData
-      );
-      setErrorMessage(null);
+      console.log("before sending update chef data", formData);
+      const response = await updateChefWs(id, formData);
+
+      if (response.status) {
+        navigate(`/chefpage/${id}`);
+
+        setErrorMessage(null);
+      }
+
       //redirect to chef page
     } catch (error) {
       setErrorMessage("Error updating chef profile");
@@ -48,23 +71,9 @@ const ChefUpdate: React.FC</* ChefUpdateProps */ any> = (props) => {
         className="space-y-4 border border-gray-300 bg-white p-6 rounded-md"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl font-bold text-center mb-4">Update Profile</h1>
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
-            onChange={handleChange}
-            value={formData.email}
-          />
-        </div>
+        <h1 className="text-2xl font-bold text-center mb-4">
+          Actualiza tu perfil
+        </h1>
         <div>
           <label
             htmlFor="profileImageUrl"

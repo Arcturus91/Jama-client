@@ -1,5 +1,6 @@
 import {
   ChefPage,
+  CreateMealPage,
   HomePage,
   LoginPage,
   MealsPage,
@@ -24,10 +25,14 @@ const routes = (props) => {
       path: "/availablemeals/:id",
       element: <MealDetailPage {...props} />,
     },
-    { path: "/updateprofile", element: <UpdateChefPage {...props} /> },
+    { path: "/chef/updateprofile", element: <UpdateChefPage {...props} /> },
     {
       path: "/chefpage/:id",
       element: <ChefPage {...props} />,
+    },
+    {
+      path: "/chef/createmeal",
+      element: <CreateMealPage {...props} />,
     },
   ];
 };

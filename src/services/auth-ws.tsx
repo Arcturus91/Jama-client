@@ -5,10 +5,12 @@ import { successStatus, internalServerError } from "../utils/format-response";
 export async function loginWs(
   data: LogInFormData
 ): Promise<SuccessResponse | ServerErrorResponse> {
+  console.log("data", data);
   try {
     const response = await api.post("/auth/login/user", data);
     return successStatus(response);
   } catch (error: unknown) {
+    console.log(error);
     return internalServerError(error as ErrorResponse);
   }
 }
