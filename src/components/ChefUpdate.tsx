@@ -11,6 +11,7 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
     const fetchChefData = async () => {
       try {
         const response = await getChefDetailWs(id as string);
+        console.log("chef loading detail", response);
         if (response.status && "data" in response) {
           setChef(response.data);
         }
@@ -42,7 +43,7 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
     try {
       console.log("before sending update chef data", formData);
       const response = await updateChefWs(id, formData);
-
+      console.log("chefUpdate", response);
       if (response.status) {
         navigate(`/chefpage/${id}`);
       } else {

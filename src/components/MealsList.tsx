@@ -29,6 +29,9 @@ const MealsList: React.FC<MealsListProps> = (props) => {
               <p className="text-gray-700">
                 Available amount: {meal.availableAmount}
               </p>
+              {meal.chef && (
+                <p className="text-gray-700">Chef: {meal.chef.email}</p>
+              )}
             </Link>
           </div>
         ))}

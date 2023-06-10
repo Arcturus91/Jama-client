@@ -5,7 +5,6 @@ import { successStatus, internalServerError } from "../utils/format-response";
 export async function loginWs(
   data: LogInFormData
 ): Promise<SuccessResponse<Partial<User | Chef>> | ServerErrorResponse> {
-  console.log("data", data);
   try {
     const response = await api.post("/auth/login/user", data);
     return successStatus(response);

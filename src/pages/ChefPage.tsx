@@ -13,9 +13,9 @@ const ChefPage: React.FC<AuthenticationProps> = (props) => {
     const fetchChefData = async () => {
       try {
         const response = await getChefDetailWs(id as string);
+        console.log("response in chef page", response);
         if (response.status && "data" in response) {
           setChef(response.data);
-          console.log("useState from chef pafge", chef);
         }
       } catch (err) {
         console.error(err);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 type SignInFormData = {
     email: string;
     password: string;
@@ -39,6 +40,11 @@ interface Meal {
     mealStatus: string | null;
     createdAt: string;
     updatedAt: string;
+    chef?: Chef;
+}
+
+interface MealDetail extends Meal {
+    chef: Chef
 }
 
 interface User {
@@ -51,6 +57,17 @@ interface User {
     createdAt: string;
     updatedAt: string;
     address: string;
+    orders?: Order[];
+}
+
+interface Order {
+    id: string;
+    totalPrice: number;
+    createdAt: Date;
+    updatedAt: Date;
+    user: User;
+    orderStatus: 'onSelection' | 'required' | 'onCooking' | 'onDelivery' | 'completed';
+    meal: Meal;
 }
 
 
@@ -63,12 +80,7 @@ interface ChefUpdateProps {
     user: Chef
 }
 
-interface MealDetail extends Meal {
-    chef: {
-        name: string;
-        address: string;
-    };
-}
+
 
 interface MealDetailProps {
     id: string;

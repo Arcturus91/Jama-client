@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { getMealDetailWs } from "../services/meals-ws";
+import { createMealOrderWs } from "../services/user-ws";
+import { useNavigate } from "react-router-dom";
 
 const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
   const [mealDetail, setMealDetail] = useState<MealDetail | null>(null);
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMealDetail = async () => {
       const response = await getMealDetailWs(id);
+      console.log("meail detail", response);
       if (response.status && "data" in response) {
         setMealDetail(response.data as MealDetail);
       }
@@ -15,9 +20,20 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
     fetchMealDetail();
   }, [id]);
 
-  const handleOrderClick = () => {
-    // Redirect to the order form component
-    // Implement the redirection logic according to your application's routing setup
+  const handleOrderClick = async () => {
+    const response = await createMealOrderWs({
+      mealId: mealDetail?.id,
+      quantity: 1,
+    });
+    if (response.status && "data" in response) {
+      console.log("signup", response);
+      navigate("/availablemeals");
+    }
+    if ("errorMessage" in response) {
+      setErrorMessage(response.errorMessage);
+    } else {
+      setErrorMessage(null);
+    }
   };
 
   if (!mealDetail) {
@@ -39,7 +55,7 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
         <p className="text-gray-700 mb-2">
           Available Amount: {mealDetail.availableAmount}
         </p>
-        <p className="text-gray-700 mb-2">Chef: {mealDetail.chef.name}</p>
+        <p className="text-gray-700 mb-2">Chef: {mealDetail.chef.email}</p>
         <p className="text-gray-700 mb-2">Address: {mealDetail.chef.address}</p>
         <button
           onClick={handleOrderClick}

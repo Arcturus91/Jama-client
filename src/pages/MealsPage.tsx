@@ -13,7 +13,7 @@ const MealsPage: React.FC<AuthenticationProps> = (props) => {
 
     const fetchData = async () => {
       const response = await fetchMeals();
-      console.log(response);
+      console.log("meal page", response);
 
       if (response.status && "data" in response) {
         setMeals(response.data as Meal[]);

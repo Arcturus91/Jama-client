@@ -63,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 </span>
                 {user.type === "user" && (
                   <Link
-                    to="/userpage"
+                    to={`/userpage/${user.id}`}
                     className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                   >
                     User Page 😎

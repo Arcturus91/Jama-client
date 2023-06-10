@@ -5,6 +5,7 @@ import {
   LoginPage,
   MealsPage,
   UpdateChefPage,
+  UserPage,
 } from "../pages";
 import MealDetailPage from "../pages/MealDetailPage";
 import SignUpPage from "../pages/SignUpPage";
@@ -26,6 +27,10 @@ const routes = (props: RoutesProps) => {
     },
     { path: "/login", element: <LoginPage {...props} /> },
     { path: "/signup", element: <SignUpPage {...props} /> },
+    {
+      path: "/userpage/:id",
+      element: <UserPage {...props} />,
+    },
     {
       path: "/availablemeals/:id",
       element: <MealDetailPage {...props} />,
