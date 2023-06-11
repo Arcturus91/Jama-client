@@ -4,9 +4,8 @@ import { getUserDetailWs } from "../services/user-ws";
 
 //TODO: change all reference in code to user as user to Client.
 
-const UserPage: React.FC<AuthenticationProps> = (props) => {
+const UserPage: React.FC<AuthenticationProps> = () => {
   const { id } = useParams<{ id: string }>();
-  console.log("user page", props);
   const [client, setClient] = useState<User | null>(null);
 
   useEffect(() => {
@@ -28,6 +27,8 @@ const UserPage: React.FC<AuthenticationProps> = (props) => {
     return <div>Meal not found</div>;
   }
   if (!client) return <div>Loading...</div>;
+
+  console.log("useState from client page", client);
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">User Details</h1>

@@ -4,7 +4,7 @@ import { createMealOrderWs } from "../services/user-ws";
 import { useNavigate } from "react-router-dom";
 
 const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
-  const [mealDetail, setMealDetail] = useState<MealDetail | null>(null);
+  const [mealDetail, setMealDetail] = useState<Meal | null>(null);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -13,7 +13,7 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
       const response = await getMealDetailWs(id);
       console.log("meail detail", response);
       if (response.status && "data" in response) {
-        setMealDetail(response.data as MealDetail);
+        setMealDetail(response.data as Meal);
       }
     };
 
@@ -21,10 +21,8 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
   }, [id]);
 
   const handleOrderClick = async () => {
-    const response = await createMealOrderWs({
-      mealId: mealDetail?.id,
-      quantity: 1,
-    });
+    const mealOrder = { mealId: id, quantity: 1 };
+    const response = await createMealOrderWs(mealOrder);
     if (response.status && "data" in response) {
       console.log("signup", response);
       navigate("/availablemeals");
@@ -55,14 +53,21 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
         <p className="text-gray-700 mb-2">
           Available Amount: {mealDetail.availableAmount}
         </p>
-        <p className="text-gray-700 mb-2">Chef: {mealDetail.chef.email}</p>
-        <p className="text-gray-700 mb-2">Address: {mealDetail.chef.address}</p>
+        {mealDetail.chef?.email && (
+          <p className="text-gray-700 mb-2">Chef: {mealDetail.chef.email}</p>
+        )}
+        {mealDetail.chef?.address && (
+          <p className="text-gray-700 mb-2">
+            Address: {mealDetail.chef.address}
+          </p>
+        )}
         <button
           onClick={handleOrderClick}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Place Order
         </button>
+        {<div className="text-red-500">{errorMessage}</div>}
       </div>
     </div>
   );

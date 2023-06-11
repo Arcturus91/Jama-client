@@ -43,9 +43,6 @@ interface Meal {
     chef?: Chef;
 }
 
-interface MealDetail extends Meal {
-    chef: Chef
-}
 
 interface User {
     email: string;
@@ -84,6 +81,11 @@ interface ChefUpdateProps {
 
 interface MealDetailProps {
     id: string;
+}
+
+interface MealOrder {
+    mealId: string;
+    quantity: number;
 }
 
 interface Chef {
