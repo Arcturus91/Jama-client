@@ -20,3 +20,12 @@ export async function updateChefWs(chefId: string, updateData: Partial<Chef>) {
     return internalServerError(error as ErrorResponse);
   }
 }
+
+export async function getAllChefsWs (){
+  try{
+    const response = await api.get("/chef/getallchef");
+    return successStatus(response);
+  } catch(error: unknown){
+    return internalServerError(error as ErrorResponse);
+  }
+}

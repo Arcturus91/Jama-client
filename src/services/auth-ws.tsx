@@ -20,8 +20,10 @@ export async function signupWs(
 ): Promise<SuccessResponse<Partial<User | Chef>> | ServerErrorResponse> {
   try {
     const response = await api.post("/auth/signup/user", data);
+    console.log(response)
     return successStatus(response);
   } catch (error: unknown) {
+    console.log(error)
     return internalServerError(error as ErrorResponse);
   }
 }

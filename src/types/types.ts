@@ -14,7 +14,7 @@ type LogInFormData = {
 interface ErrorResponse {
     response?: {
         data?: {
-            errorMessage?: string;
+            message?: string;
         };
     };
 }

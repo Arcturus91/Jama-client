@@ -16,7 +16,6 @@ export async function createMealOrderWs(
   data: MealOrder
 ): Promise<SuccessResponse<Order> | ServerErrorResponse> {
   try {
-    console.log("order ws", data);
     const response = await api.post<Order>("/user/addmealorder", data);
     //the Order type specifies the expected response type of the promise.
     console.log("order ws", response);

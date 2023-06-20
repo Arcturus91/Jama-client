@@ -24,7 +24,7 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
     const mealOrder = { mealId: id, quantity: 1 };
     const response = await createMealOrderWs(mealOrder);
     if (response.status && "data" in response) {
-      console.log("signup", response);
+      console.log("createMealOrderWs", response);
       navigate("/availablemeals");
     }
     if ("errorMessage" in response) {
