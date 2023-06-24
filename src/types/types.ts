@@ -90,6 +90,7 @@ interface MealOrder {
 
 interface Chef {
     id: string;
+    name:string| null;
     email: string;
     password: string;
     profileImageUrl: string | null;

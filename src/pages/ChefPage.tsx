@@ -5,6 +5,7 @@ import { getChefDetailWs } from "../services/chef-ws";
 
 const ChefPage: React.FC<AuthenticationProps> = (props) => {
   const { user } = props;
+  console.log("i am user from chef page", user?.type);
   const { id } = useParams<{ id: string }>();
   console.log("chef page", props);
   const [chef, setChef] = useState<Chef | null>(null);
@@ -44,7 +45,7 @@ const ChefPage: React.FC<AuthenticationProps> = (props) => {
                 alt="chef"
               />
               <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{chef.email}</div>
+                <div className="font-bold text-xl mb-2">{chef.name}</div>
                 <p className="text-gray-700 text-base">
                   Bio: {chef.bio || "No bio available"}
                 </p>
@@ -59,18 +60,22 @@ const ChefPage: React.FC<AuthenticationProps> = (props) => {
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                   Phone: {chef.phoneNumber || "No phone number"}
                 </span>
-                <Link
-                  to="/chef/updateprofile"
-                  className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Actualiza tu perfil
-                </Link>
-                <Link
-                  to="/chef/createmeal"
-                  className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Registra un platillo
-                </Link>
+                {user?.id === id && (
+                  <>
+                    <Link
+                      to="/chef/updateprofile"
+                      className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Actualiza tu perfil
+                    </Link>
+                    <Link
+                      to="/chef/createmeal"
+                      className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Registra un platillo
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

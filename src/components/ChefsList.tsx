@@ -13,7 +13,7 @@ const ChefsList: React.FC<ChefsListProps> = (props) => {
       {chefs.map((chef) => (
         <div key={chef.id} className="group">
           <Link
-            to={props.user ? `/availablemeals/${chef.id}` : "/login"}
+            to={ `/chefpage/${chef.id}` }
             className="block"
           >
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">

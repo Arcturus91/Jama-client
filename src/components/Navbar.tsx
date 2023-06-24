@@ -45,13 +45,13 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                   to="/signup"
                   className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Signup
+                  Crea tu cuenta
                 </Link>
                 <Link
                   to="/login"
                   className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Login
+                  Ingresa
                 </Link>
               </div>
             </div>

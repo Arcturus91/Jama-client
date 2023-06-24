@@ -27,6 +27,7 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
     phoneNumber: chef?.phoneNumber,
     bio: chef?.bio,
     address: chef?.address,
+    name:chef?.name
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -128,6 +129,22 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
             value={formData.address}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
+            onChange={handleChange}
+            value={formData.name as string}
           />
         </div>
         <button

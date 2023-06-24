@@ -43,14 +43,14 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
         onSubmit={handleSubmit}
       >
         <h1 className="text-2xl font-bold text-center mb-4">
-          Porfavor regístrate para continuar
+          Regístrate para continuar
         </h1>
         <div>
           <label
             htmlFor="email"
             className="block text-sm font-medium text-gray-700"
           >
-            Email
+            Correo
           </label>
           <input
             id="email"
@@ -66,7 +66,7 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
             htmlFor="password"
             className="block text-sm font-medium text-gray-700"
           >
-            Password
+            Contraseña
           </label>
           <input
             id="password"
@@ -82,7 +82,7 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
             htmlFor="type"
             className="block text-sm font-medium text-gray-700"
           >
-            Type
+            Tipo
           </label>
           <select
             id="type"
@@ -91,8 +91,8 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
             onChange={handleChange}
             value={formData.type}
           >
-            <option value="">Select type...</option>
-            <option value="user">User</option>
+            <option value="">Selecciona tu tipo de usuario</option>
+            <option value="user">Cliente</option>
             <option value="chef">Chef</option>
           </select>
         </div>
@@ -100,7 +100,7 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
           type="submit"
           className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Submit
+          Regístrate
         </button>
         {errorMessage && <div className="text-red-500">{errorMessage}</div>}
       </form>
