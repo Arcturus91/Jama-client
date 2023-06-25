@@ -20,11 +20,15 @@ const HomeLandingTop: React.FC = () => {
   
   return (
 <div className="flex items-center justify-center">
-      <div className="w-full mx-auto max-w-4xl my-16">
+      <div className="w-full mx-auto max-w-4xl my-8">
         <div className="relative flex flex-col md:flex-row">
           <div className="flex flex-col justify-center md:w-1/2 mx-4 md:mx-16">
-            <h1 className="font-sans z-10 text-black font-bold text-2xl md:text-4xl text-center md:text-left max-w-xl">
-              Bienvenidos a Jama, la mejor experiencia de comida peruana casera, a un paso de ti
+            <h1 className="my-4 font-sans z-10 text-black font-bold text-2xl md:text-2xl text-center md:text-left max-w-4xl">
+            Bienvenido a JAMA ❗
+            <br/>
+            La mejor, la primera y la única App para disfrutar de COMIDA verdaderamente casera, sabrosa y a un paso de ti. 🚶‍♂️
+            <br/>
+            (cero costo de delivery).
             </h1>
           </div>
           <div className="relative md:w-1/2">

@@ -18,20 +18,20 @@ const Navbar: React.FC<NavbarProps> = (props) => {
               </button>
             </div>
             <div
-              className={`ml-10 flex items-baseline space-x-4 ${
+              className={`ml-4 flex items-center md:ml-6 ${
                 open ? "block" : "hidden"
               } md:block`}
             >
               <Link
                 to="/"
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
                 Inicio 🏠
               </Link>
               {user?.type === "user" && (
                 <Link
                   to={`/userpage/${user.id}`}
-                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
                 >
                   User Page 😎
                 </Link>
@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
               {user?.type === "chef" && (
                 <Link
                   to={`/chefpage/${user.id}`}
-                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Chef Page 👨‍🍳
                 </Link>
@@ -47,13 +47,13 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 
               <Link
                 to="/contact"
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
                 Contacto 👋
               </Link>
               <Link
                 to="/nosotros"
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
                 Nosotros 🇵🇪
               </Link>
@@ -67,13 +67,13 @@ const Navbar: React.FC<NavbarProps> = (props) => {
             >
               <Link
                 to="/signup"
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
                 Crea tu cuenta
               </Link>
               <Link
                 to="/login"
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
                 Ingresa
               </Link>
@@ -92,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 onClick={() => {
                   props.handleLogout();
                 }}
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
                 Logout
               </Link>
