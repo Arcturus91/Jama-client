@@ -22,7 +22,7 @@ const Footer = () => (
       </a>
     </div>
     <div className="text-center">
-      &copy; {new Date().getFullYear()} JamaApp. Todos los derechos reservados. Servicio diseñado para Perú.
+      &copy; {new Date().getFullYear()} Jama - Todos los derechos reservados. Servicio exclusivo para Perú.
     </div>
   </footer>
 );

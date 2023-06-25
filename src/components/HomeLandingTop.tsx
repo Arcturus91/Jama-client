@@ -24,7 +24,7 @@ const HomeLandingTop: React.FC = () => {
         <div className="relative flex flex-col md:flex-row">
           <div className="flex flex-col justify-center md:w-1/2 mx-4 md:mx-16">
             <h1 className="font-sans z-10 text-black font-bold text-2xl md:text-4xl text-center md:text-left max-w-xl">
-              Bienvenidos a JamaApp, la mejor experiencia de comida peruana casera, a un paso de ti
+              Bienvenidos a Jama, la mejor experiencia de comida peruana casera, a un paso de ti
             </h1>
           </div>
           <div className="relative md:w-1/2">
