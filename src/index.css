@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.landing-bg {
+    background-image: url('https://res.cloudinary.com/dad5dandd/image/upload/v1685894241/JAMAPP/Screenshot_2023-06-04_at_10.57.15_yvjqq1.png');
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }

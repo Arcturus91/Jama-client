@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAvailableMealsWs } from "../services/meals-ws";
-import { ChefsList, MealsList } from "../components";
+import { ChefsList, HomeLandingTop, MealsList } from "../components";
 import { getAllChefsWs } from "../services/chef-ws";
 
 const MealsPage: React.FC<AuthenticationProps> = (props) => {
@@ -44,7 +44,8 @@ const MealsPage: React.FC<AuthenticationProps> = (props) => {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <HomeLandingTop />
+      <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold mb-4">Nuestros platos disponibles</h2>
         <MealsList meals={meals} user={user} />
       </div>

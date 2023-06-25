@@ -6,3 +6,4 @@ export { default as MealsList } from "./MealsList";
 export { default as ChefUpdate } from "./ChefUpdate"
 export { default as CreateMealForm } from "./CreateMealForm"
 export { default as ChefsList } from "./ChefsList"
+export {default as HomeLandingTop} from "./HomeLandingTop"

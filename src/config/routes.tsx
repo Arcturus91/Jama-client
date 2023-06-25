@@ -1,9 +1,9 @@
 import {
   ChefPage,
   CreateMealPage,
-  HomePage,
   LoginPage,
   MealsPage,
+  NotFoundPage,
   UpdateChefPage,
   UserPage,
 } from "../pages";
@@ -19,10 +19,6 @@ const routes = (props: RoutesProps) => {
   return [
     {
       path: "/",
-      element: <HomePage />,
-    },
-    {
-      path: "/availablemeals",
       element: <MealsPage {...props} />,
     },
     { path: "/login", element: <LoginPage {...props} /> },
@@ -44,6 +40,8 @@ const routes = (props: RoutesProps) => {
       path: "/chef/createmeal",
       element: <CreateMealPage {...props} />,
     },
+    {path: "*",
+      element:<NotFoundPage/>}
   ];
 };
 
