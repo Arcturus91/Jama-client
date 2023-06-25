@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar } from "./components";
+import { Footer, Navbar } from "./components";
 import routes from "./config/routes";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { logoutWs } from "./services/auth-ws";
@@ -34,6 +34,7 @@ const App = () => {
           <Route key={item.path} {...item} />
         ))}
       </Routes>
+      <Footer/>
     </div>
   );
 };
