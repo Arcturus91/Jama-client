@@ -26,7 +26,7 @@ const UserPage: React.FC<AuthenticationProps> = () => {
   if (!id) {
     return <div>Meal not found</div>;
   }
-  if (!client) return <div>Loading...</div>;
+  if (!client) return <div>Cargando...</div>;
 
   console.log("useState from client page", client);
   return (

@@ -24,10 +24,10 @@ const MealsList: React.FC<MealsListProps> = (props) => {
               </div>
               <h3 className="mt-4 text-sm text-gray-700">{meal.name}</h3>
               <p className="mt-1 text-lg font-medium text-gray-900">
-                ${meal.price.toFixed(2)}
+                S/. {meal.price.toFixed(2)}
               </p>
               <p className="text-gray-700">
-                Available amount: {meal.availableAmount}
+               Platillos disponibles: {meal.availableAmount}
               </p>
               {meal.chef && (
                 <p className="text-gray-700">Chef: {meal.chef.email}</p>
