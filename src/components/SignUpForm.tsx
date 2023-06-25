@@ -27,7 +27,7 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
     if (response.status && "data" in response) {
       authentication(response.data);
       console.log("signup", response);
-      navigate("/availablemeals");
+      navigate("/");
     }
     if ("errorMessage" in response) {
       setErrorMessage(response.errorMessage);

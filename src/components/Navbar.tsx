@@ -28,12 +28,23 @@ const Navbar: React.FC<NavbarProps> = (props) => {
               >
                 Inicio 🏠
               </Link>
-              <Link
-                to="/availablemeals"
-                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Tu Jama 🍗
-              </Link>
+              {user?.type === "user" && (
+                <Link
+                  to={`/userpage/${user.id}`}
+                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  User Page 😎
+                </Link>
+              )}
+              {user?.type === "chef" && (
+                <Link
+                  to={`/chefpage/${user.id}`}
+                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Chef Page 👨‍🍳
+                </Link>
+              )}
+
               <Link
                 to="/contact"
                 className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
@@ -49,51 +60,42 @@ const Navbar: React.FC<NavbarProps> = (props) => {
             </div>
           </div>
           {!user ? (
-             <div className={`ml-4 flex items-center md:ml-6 ${open ? 'block' : 'hidden'} md:block`}>
-                <Link
-                  to="/signup"
-                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Crea tu cuenta
-                </Link>
-                <Link
-                  to="/login"
-                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Ingresa
-                </Link>
+            <div
+              className={`ml-4 flex items-center md:ml-6 ${
+                open ? "block" : "hidden"
+              } md:block`}
+            >
+              <Link
+                to="/signup"
+                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Crea tu cuenta
+              </Link>
+              <Link
+                to="/login"
+                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Ingresa
+              </Link>
             </div>
           ) : (
-<div className={`ml-4 flex items-center md:ml-6 ${open ? 'block' : 'hidden'} md:block`}>
-                <span className="text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
-                  Bienvenido {user.type}: {user.email}
-                </span>
-                {user.type === "user" && (
-                  <Link
-                    to={`/userpage/${user.id}`}
-                    className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    User Page 😎
-                  </Link>
-                )}
-                {user.type === "chef" && (
-                  <Link
-                    to={`/chefpage/${user.id}`}
-                    className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Chef Page 👨‍🍳
-                  </Link>
-                )}
-                <Link
-                  to="/"
-                  onClick={() => {
-                    props.handleLogout();
-                  }}
-                  className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Logout
-                </Link>
-              
+            <div
+              className={`ml-4 flex items-center md:ml-6 ${
+                open ? "block" : "hidden"
+              } md:block`}
+            >
+              <span className="text-gray-800 px-3 py-2 rounded-md text-sm font-medium">
+                Bienvenido {user.email}
+              </span>
+              <Link
+                to="/"
+                onClick={() => {
+                  props.handleLogout();
+                }}
+                className="text-gray-800 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Logout
+              </Link>
             </div>
           )}
         </div>
