@@ -81,6 +81,7 @@ interface ChefUpdateProps {
 
 interface MealDetailProps {
     id: string;
+    user?: User | Chef | null;
 }
 
 interface MealOrder {

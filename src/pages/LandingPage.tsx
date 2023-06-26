@@ -3,7 +3,7 @@ import { getAvailableMealsWs } from "../services/meals-ws";
 import { ChefsList, HomeLandingTop, MealsList } from "../components";
 import { getAllChefsWs } from "../services/chef-ws";
 
-const MealsPage: React.FC<AuthenticationProps> = (props) => {
+const LandingPage: React.FC<AuthenticationProps> = (props) => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [chefs, setChefs] = useState<Chef[]>([]);
   const { user } = props;
@@ -58,4 +58,4 @@ const MealsPage: React.FC<AuthenticationProps> = (props) => {
   );
 };
 
-export default MealsPage;
+export default LandingPage;

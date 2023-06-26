@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { getMealDetailWs } from "../services/meals-ws";
+import { deleteMealWs, getMealDetailWs } from "../services/meals-ws";
 import { createMealOrderWs } from "../services/user-ws";
 import { useNavigate } from "react-router-dom";
 
-const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
+const MealDetail: React.FC<MealDetailProps> = ({ id, user }) => {
   const [mealDetail, setMealDetail] = useState<Meal | null>(null);
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+  console.log("USER IN MEAL DETAIL", user);
   useEffect(() => {
     const fetchMealDetail = async () => {
       const response = await getMealDetailWs(id);
@@ -34,6 +34,22 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
     }
   };
 
+  const handleDeleteClick = async ()=>{
+    const response = await deleteMealWs(id);
+    if (response.status && "data" in response) {
+      console.log("deleteMeal", response);
+      navigate(`/chefpage/${user?.id}`);
+    }
+    if ("errorMessage" in response) {
+      setErrorMessage(response.errorMessage);
+    } else {
+      setErrorMessage(null);
+    }
+  }
+  const handleUpdateClick = async ()=>{
+    console.log('you clicked update meal')
+  }
+  
   if (!mealDetail) {
     return <div>Loading...</div>;
   }
@@ -61,12 +77,29 @@ const MealDetail: React.FC<MealDetailProps> = ({ id }) => {
             Address: {mealDetail.chef.address}
           </p>
         )}
-        <button
-          onClick={handleOrderClick}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Place Order
-        </button>
+        {user?.type === "user" ? (
+          <button
+            onClick={handleOrderClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Place Order
+          </button>
+        ) : (
+          <div className='flex flex-row'>
+            <button
+              onClick={handleDeleteClick}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-4"
+            >
+              Elimina este platillo
+            </button>
+            <button
+              onClick={handleUpdateClick}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-4"
+            >
+              Actualiza el platillo
+            </button>
+          </div>
+        )}
         {<div className="text-red-500">{errorMessage}</div>}
       </div>
     </div>

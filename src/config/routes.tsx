@@ -2,7 +2,7 @@ import {
   ChefPage,
   CreateMealPage,
   LoginPage,
-  MealsPage,
+  LandingPage,
   NotFoundPage,
   UpdateChefPage,
   UserPage,
@@ -19,7 +19,7 @@ const routes = (props: RoutesProps) => {
   return [
     {
       path: "/",
-      element: <MealsPage {...props} />,
+      element: <LandingPage {...props} />,
     },
     { path: "/login", element: <LoginPage {...props} /> },
     { path: "/signup", element: <SignUpPage {...props} /> },

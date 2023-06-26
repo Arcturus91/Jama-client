@@ -1,4 +1,4 @@
-export { default as MealsPage } from "./MealsPage";
+export { default as LandingPage } from "./LandingPage";
 export { default as LoginPage } from "./LoginPage";
 export { default as ChefPage } from "./ChefPage";
 export { default as UpdateChefPage } from "./UpdateChefPage"

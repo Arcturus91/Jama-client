@@ -35,3 +35,14 @@ export async function createMealWs(
     return internalServerError(error);
   }
 }
+
+export async function deleteMealWs(
+  mealId: string
+): Promise<SuccessResponse<Meal> | ServerErrorResponse> {
+  try {
+    const response = await api.delete(`/chef/deletemeal/${mealId}`);
+    return successStatus(response);
+  } catch (error: unknown) {
+    return internalServerError(error as ErrorResponse);
+  }
+}
