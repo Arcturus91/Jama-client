@@ -8,3 +8,4 @@ export { default as CreateMealForm } from "./CreateMealForm"
 export { default as ChefsList } from "./ChefsList"
 export {default as HomeLandingTop} from "./HomeLandingTop"
 export {default as Footer} from './Footer'
+export {default as LastMealOrder} from './LastMealOrder'

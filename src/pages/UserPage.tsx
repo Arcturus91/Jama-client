@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserDetailWs } from "../services/user-ws";
+import { LastMealOrder } from "../components";
 
 //TODO: change all reference in code to user as user to Client.
 
@@ -22,6 +23,8 @@ const UserPage: React.FC<AuthenticationProps> = () => {
     };
     fetchUserData();
   }, [id]);
+
+
 
   if (!id) {
     return <div>Meal not found</div>;
@@ -67,7 +70,8 @@ const UserPage: React.FC<AuthenticationProps> = () => {
         <div className="mt-4">
           <h3 className="text-lg font-bold mb-2">Orders:</h3>
           {client.orders && (
-            <p className="text-gray-600">{client.orders.length}</p>
+
+           <LastMealOrder order={client.orders[client.orders.length-1]}/>
           )}
         </div>
       </div>

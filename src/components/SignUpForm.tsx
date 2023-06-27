@@ -7,6 +7,8 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
     email: "",
     password: "",
     type: "",
+    address: "",
+    phoneNumber: "",
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -95,6 +97,39 @@ const SignUpForm: React.FC<AuthenticationProps> = ({ authentication }) => {
             <option value="user">Cliente</option>
             <option value="chef">Chef</option>
           </select>
+        </div>
+        <div>
+          <label
+            htmlFor="address"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Dirección
+          </label>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
+            onChange={handleChange}
+            value={formData.address}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="phoneNumber"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Número de teléfono
+          </label>
+          <input
+            id="phoneNumber"
+            name="phoneNumber"
+            type="text"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
+            onChange={handleChange}
+            value={formData.phoneNumber}
+            maxLength={9}
+          />
         </div>
         <button
           type="submit"

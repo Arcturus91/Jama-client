@@ -3,6 +3,8 @@ type SignInFormData = {
     email: string;
     password: string;
     type: string;
+    address:string,
+    phoneNumber:string,
 };
 
 type LogInFormData = {
@@ -63,10 +65,9 @@ interface Order {
     createdAt: Date;
     updatedAt: Date;
     user: User;
-    orderStatus: 'onSelection' | 'required' | 'onCooking' | 'onDelivery' | 'completed';
+    orderStatus: 'requested' | 'onCooking' | 'onDelivery' | 'completed';
     meal: Meal;
 }
-
 
 interface AuthenticationProps {
     user: User | Chef | null;
