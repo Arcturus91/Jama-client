@@ -3,7 +3,7 @@ import { loginWs } from "../services/auth-ws";
 import { useNavigate } from "react-router-dom";
 
 const LogInForm: React.FC<AuthenticationProps> = ({ authentication }) => {
-  const [formData, setFormData] = useState<SignInFormData>({
+  const [formData, setFormData] = useState<LogInFormData>({
     email: "",
     password: "",
     type: "",
