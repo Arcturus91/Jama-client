@@ -25,7 +25,7 @@ const MealDetail: React.FC<MealDetailProps> = ({ id, user }) => {
     const response = await createMealOrderWs(mealOrder);
     if (response.status && "data" in response) {
       console.log("createMealOrderWs", response);
-      navigate("/"); //!implement redirect to user page or to a page where there is feedback about purchase
+      navigate("/");
     }
     if ("errorMessage" in response) {
       setErrorMessage(response.errorMessage);
