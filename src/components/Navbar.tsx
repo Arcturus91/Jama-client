@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                   to={`/userpage/${user.id}`}
                   className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  User Page 😎
+                  Tu Jama 😎
                 </Link>
               )}
               {user?.type === "chef" && (
@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                   to={`/chefpage/${user.id}`}
                   className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Chef Page 👨‍🍳
+                  Chef 👨‍🍳
                 </Link>
               )}
 
@@ -94,7 +94,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 }}
                 className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
               >
-                Logout
+                Cierra sesión
               </Link>
             </div>
           )}

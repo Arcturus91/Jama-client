@@ -4,6 +4,8 @@ import { getUserDetailWs } from "../services/user-ws";
 import { LastMealOrder } from "../components";
 
 //TODO: change all reference in code to user as user to Client.
+//! Add button for editing user profile
+//! add button to add food review / chef review 
 
 const UserPage: React.FC<AuthenticationProps> = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,17 +26,15 @@ const UserPage: React.FC<AuthenticationProps> = () => {
     fetchUserData();
   }, [id]);
 
-
-
   if (!id) {
-    return <div>Meal not found</div>;
+    return <div>Platillo no encontrado</div>;
   }
   if (!client) return <div>Cargando...</div>;
 
-  console.log("useState from client page", client);
+  console.log("client from user page", client);
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">User Details</h1>
+      <h1 className="text-2xl font-bold mb-4">Tu Perfil</h1>
       <div className="bg-white shadow rounded-lg p-6">
         <div className="flex items-center mb-6">
           {client.profileImageUrl ? (
@@ -56,22 +56,25 @@ const UserPage: React.FC<AuthenticationProps> = () => {
             <h2 className="text-xl font-bold">{client.email}</h2>
             <p className="text-gray-600">
               {client.phoneNumber
-                ? `Phone: ${client.phoneNumber}`
-                : "Phone number not available"}
+                ? `Teléfono: ${client.phoneNumber}`
+                : "Teléfono no disponible"}
             </p>
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-bold mb-2">Address:</h3>
+          <h3 className="text-lg font-bold mb-2">Tu dirección de envío:</h3>
           <p className="text-gray-600">
             {client.address || "Address not available"}
           </p>
         </div>
         <div className="mt-4">
-          <h3 className="text-lg font-bold mb-2">Orders:</h3>
-          {client.orders && (
-
-           <LastMealOrder order={client.orders[client.orders.length-1]}/>
+          <h3 className="text-lg font-bold mb-2">Órdenes:</h3>
+          {client.orders && client.orders?.length > 0 ? (
+            <LastMealOrder order={client.orders[client.orders.length - 1]} />
+          ) : (
+            <p className="text-gray-600">
+              Tu primera orden se verá registrada aquí
+            </p>
           )}
         </div>
       </div>

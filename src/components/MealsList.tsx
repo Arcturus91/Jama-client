@@ -14,7 +14,7 @@ const MealsList: React.FC<MealsListProps> = (props) => {
         .filter((meal) => meal.isAvailable)
         .map((meal) => (
           <div key={meal.id} className="group">
-            <Link to={props.user ? `/availablemeals/${meal.id}` : "/login"}>
+            <Link to={props.user ? `/availablemeals/${meal.id}` : "/signup"}>
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                 <img
                   src={meal.imageUrl}

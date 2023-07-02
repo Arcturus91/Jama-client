@@ -5,9 +5,10 @@ interface LastMealOrderProps {
 }
 
 const LastMealOrder: React.FC<LastMealOrderProps> = ({ order }) => {
-  console.log('lasr meal',order)
+  console.log('last meal',order)
   return (
-    <div className="p-4">
+
+   order && (<div className="p-4">
       <h2 className="text-xl font-semibold mb-4">Order Details</h2>
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
@@ -37,7 +38,9 @@ const LastMealOrder: React.FC<LastMealOrderProps> = ({ order }) => {
           </tr>
         </tbody>
       </table>
-    </div>
+    </div>)
+
+
   );
 };
 
