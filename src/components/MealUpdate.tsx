@@ -72,7 +72,7 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
             htmlFor="profileImageUrl"
             className="block text-sm font-medium text-gray-700"
           >
-            Link web de la imagen de perfil
+            Link web de la foto del platillo
           </label>
           <input
             id="profileImageUrl"

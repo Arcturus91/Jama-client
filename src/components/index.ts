@@ -9,3 +9,4 @@ export { default as ChefsList } from "./ChefsList"
 export {default as HomeLandingTop} from "./HomeLandingTop"
 export {default as Footer} from './Footer'
 export {default as LastMealOrder} from './LastMealOrder'
+export {default as UserUpdate} from './UserUpdate'

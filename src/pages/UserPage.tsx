@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUserDetailWs } from "../services/user-ws";
 import { LastMealOrder } from "../components";
 
@@ -66,6 +66,24 @@ const UserPage: React.FC<AuthenticationProps> = () => {
           <p className="text-gray-600">
             {client.address || "Address not available"}
           </p>
+        </div>
+        <div>
+        {client?.id === id && (
+                  <>
+                    <Link
+                      to="/user/updateprofile"
+                      className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Actualiza tu perfil
+                    </Link>
+                    <Link
+                      to="/"
+                      className="mt-2 mx-2 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Ordena un platillo
+                    </Link>
+                  </>
+                )}
         </div>
         <div className="mt-4">
           <h3 className="text-lg font-bold mb-2">Órdenes:</h3>

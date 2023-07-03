@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { getChefDetailWs, updateChefWs } from "../services/chef-ws";
 import { useNavigate } from "react-router-dom";
+import { getUserDetailWs, updateUserWs } from "../services/user-ws";
 
-const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
-  const { id } = user as Chef;
-  const [chef, setChef] = useState<Chef | null>(null);
+const UserUpdate: React.FC<AuthenticationProps> = ({ user }) => {
+  const { id } = user as User;
+  const [client, setClient] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchChefData = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await getChefDetailWs(id as string);
-        console.log("chef loading detail", response);
+        const response = await getUserDetailWs(id as string);
+        console.log("user detail", response);
         if (response.status && "data" in response) {
-          setChef(response.data);
+          setClient(response.data);
         }
       } catch (err) {
         console.error(err);
       }
     };
-    fetchChefData();
+    fetchUserData();
   }, [id]);
 
   const [formData, setFormData] = useState({
-    profileImageUrl: chef?.profileImageUrl,
-    phoneNumber: chef?.phoneNumber,
-    bio: chef?.bio,
-    address: chef?.address,
-    name:chef?.name
+    profileImageUrl: client?.profileImageUrl,
+    phoneNumber: client?.phoneNumber,
+    address: client?.address,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,18 +40,18 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      console.log("before sending update chef data", formData);
-      const response = await updateChefWs(id, formData);
-      console.log("chefUpdate", response);
+      console.log("before sending update user data", formData);
+      const response = await updateUserWs(id, formData);
+      console.log("UserUpdate", response);
       if (response.status) {
-        navigate(`/chefpage/${id}`);
+        navigate(`/userpage/${id}`);
       } else {
-        setErrorMessage(response.errorMessage || "Error updating chef profile");
+        setErrorMessage(response.errorMessage || "Error updating user profile");
       }
     } catch (error) {
-      console.log("Error in updateChefWs:", error);
+      console.log("Error in updateUserWs:", error);
       setErrorMessage(
-        "An unexpected error occurred while updating the chef profile."
+        "An unexpected error occurred while updating the User profile."
       );
     }
   };
@@ -97,22 +95,7 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
             value={formData.phoneNumber as string}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="bio"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Bio
-          </label>
-          <input
-            id="bio"
-            name="bio"
-            type="text"
-            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
-            onChange={handleChange}
-            value={formData.bio as string}
+            maxLength={9}
           />
         </div>
         <div>
@@ -128,30 +111,14 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
             type="text"
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            value={formData.address}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
-            onChange={handleChange}
-            value={formData.name as string}
+            value={formData.address as string }
           />
         </div>
         <button
           type="submit"
           className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Update
+          Actualizar
         </button>
         {<div className="text-red-500">{errorMessage}</div>}
       </form>
@@ -159,4 +126,4 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
   );
 };
 
-export default ChefUpdate;
+export default UserUpdate;

@@ -25,3 +25,12 @@ export async function createMealOrderWs(
     return internalServerError(error);
   }
 }
+
+export async function updateUserWs(userId: string, updateData: Partial<User>) {
+  try {
+    const response = await api.put(`/user/updateuser/${userId}`, updateData);
+    return successStatus(response);
+  } catch (error: unknown) {
+    return internalServerError(error as ErrorResponse);
+  }
+}
