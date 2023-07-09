@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { getChefDetailWs, updateChefWs } from "../services/chef-ws";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getMealDetailWs, updateMealWs } from "../services/meals-ws";
 
-const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
-  const { id } = user as Chef;
-  const [chef, setChef] = useState<Chef | null>(null);
+const MealUpdate: React.FC<AuthenticationProps> = ({ user }) => {
+/*   const { id } = user as Chef; */
+  const [meal, setMeal] = useState<Meal | null>(null);
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    const fetchChefData = async () => {
+    const fetchMealData = async () => {
       try {
-        const response = await getChefDetailWs(id as string);
-        console.log("chef loading detail", response);
+        const response = await getMealDetailWs(id as string);
+        console.log("meal loading detail", response);
         if (response.status && "data" in response) {
-          setChef(response.data);
+          setMeal(response.data);
         }
       } catch (err) {
         console.error(err);
       }
     };
-    fetchChefData();
+    fetchMealData();
   }, [id]);
 
   const [formData, setFormData] = useState({
-    profileImageUrl: chef?.profileImageUrl,
-    phoneNumber: chef?.phoneNumber,
-    bio: chef?.bio,
-    address: chef?.address,
-    name:chef?.name
+    imageUrl: meal?.imageUrl,
+    name: meal?.name,
+    description: meal?.description,
+    price: meal?.price,
+    availableAmount: meal?.availableAmount,
+    isAvailable: meal?.isAvailable,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,18 +44,18 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      console.log("before sending update chef data", formData);
-      const response = await updateChefWs(id, formData);
-      console.log("chefUpdate", response);
+      console.log("before sending update meal data", formData);
+      const response = await updateMealWs(id as string, formData);
+      console.log("MealUpdate", response);
       if (response.status) {
-        navigate(`/chefpage/${id}`);
+        navigate(`/chefpage/${user?.id}`);
       } else {
-        setErrorMessage(response.errorMessage || "Error updating chef profile");
+        setErrorMessage(response.errorMessage || "Error actualizando el platillo");
       }
     } catch (error) {
-      console.log("Error in updateChefWs:", error);
+      console.log("Error in updateMealWs:", error);
       setErrorMessage(
-        "An unexpected error occurred while updating the chef profile."
+        "Un error inesperado ocurrió actualizando el platillo"
       );
     }
   };
@@ -65,70 +67,22 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
         onSubmit={handleSubmit}
       >
         <h1 className="text-2xl font-bold text-center mb-4">
-          Actualiza tu perfil
+          Actualiza el platillo
         </h1>
         <div>
           <label
-            htmlFor="profileImageUrl"
+            htmlFor="imageUrl"
             className="block text-sm font-medium text-gray-700"
           >
             Link web de la foto del platillo
           </label>
           <input
-            id="profileImageUrl"
-            name="profileImageUrl"
+            id="imageUrl"
+            name="imageUrl"
             type="text"
             className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
             onChange={handleChange}
-            value={formData.profileImageUrl as string}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="phoneNumber"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Phone Number
-          </label>
-          <input
-            id="phoneNumber"
-            name="phoneNumber"
-            type="text"
-            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
-            onChange={handleChange}
-            value={formData.phoneNumber as string}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="bio"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Bio
-          </label>
-          <input
-            id="bio"
-            name="bio"
-            type="text"
-            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
-            onChange={handleChange}
-            value={formData.bio as string}
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="address"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Address
-          </label>
-          <input
-            id="address"
-            name="address"
-            type="text"
-            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
-            onChange={handleChange}
-            value={formData.address}
+            value={formData.imageUrl as string}
           />
         </div>
         <div>
@@ -136,7 +90,7 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
             htmlFor="name"
             className="block text-sm font-medium text-gray-700"
           >
-            Name
+            Nombre del platillo
           </label>
           <input
             id="name"
@@ -147,11 +101,77 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
             value={formData.name as string}
           />
         </div>
+        <div>
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Descripción
+          </label>
+          <input
+            id="description"
+            name="description"
+            type="text"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
+            onChange={handleChange}
+            value={formData.description as string}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="price"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Precio
+          </label>
+          <input
+            id="price"
+            name="price"
+            type="number"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
+            onChange={handleChange}
+            value={formData.price}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="availableAmount"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Cantidad Disponible
+          </label>
+          <input
+            id="availableAmount"
+            name="availableAmount"
+            type="number"
+            className="mt-1 block w-full px-2 py-2 border border-gray-300 shadow-sm rounded-md text-gray-700"
+            onChange={handleChange}
+            value={formData.availableAmount as number}
+          />
+        </div>
+
+        <div className="flex items-center">
+          <input
+            id="isAvailable"
+            name="isAvailable"
+            type="checkbox"
+            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            onChange={handleChange}
+            checked={formData.isAvailable}
+          />
+          <label
+            htmlFor="isAvailable"
+            className="ml-2 block text-sm font-medium text-gray-700"
+          >
+            Disponible
+          </label>
+        </div>
+
         <button
           type="submit"
           className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Update
+          Actualizar
         </button>
         {<div className="text-red-500">{errorMessage}</div>}
       </form>
@@ -159,4 +179,4 @@ const ChefUpdate: React.FC<AuthenticationProps> = ({ user }) => {
   );
 };
 
-export default ChefUpdate;
+export default MealUpdate;

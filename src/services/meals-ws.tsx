@@ -46,3 +46,14 @@ export async function deleteMealWs(
     return internalServerError(error as ErrorResponse);
   }
 }
+  export async function updateMealWs(
+    mealId: string, updateData: Partial<Meal>
+  ): Promise<SuccessResponse<Meal> | ServerErrorResponse> {
+    try {
+      const response = await api.patch(`/chef/updatemeal/${mealId}`,updateData);
+      return successStatus(response);
+    } catch (error: unknown) {
+      return internalServerError(error as ErrorResponse);
+    }
+  }
+

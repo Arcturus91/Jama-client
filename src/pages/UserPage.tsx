@@ -64,7 +64,7 @@ const UserPage: React.FC<AuthenticationProps> = () => {
         <div>
           <h3 className="text-lg font-bold mb-2">Tu dirección de envío:</h3>
           <p className="text-gray-600">
-            {client.address || "Address not available"}
+            {client.address || "Dirección no disponible"}
           </p>
         </div>
         <div>

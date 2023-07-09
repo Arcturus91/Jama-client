@@ -10,6 +10,7 @@ import {
 } from "../pages";
 import MealDetailPage from "../pages/MealDetailPage";
 import SignUpPage from "../pages/SignUpPage";
+import UpdateMealPage from "../pages/UpdateMealPage";
 
 interface RoutesProps {
   user: User | Chef | null;
@@ -41,6 +42,10 @@ const routes = (props: RoutesProps) => {
     {
       path: "/chef/createmeal",
       element: <CreateMealPage {...props} />,
+    },
+    {
+      path:"/chef/updatemeal/:id",
+      element: <UpdateMealPage {...props}/>
     },
     {path: "*",
       element:<NotFoundPage/>}

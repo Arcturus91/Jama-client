@@ -14,13 +14,13 @@ const LastMealOrder: React.FC<LastMealOrderProps> = ({ order }) => {
         <thead>
           <tr>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-              Meal Name
+              Platillo
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-              Order Status
+              Status de tu orden
             </th>
             <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-              Total Price
+             Precio total
             </th>
           </tr>
         </thead>

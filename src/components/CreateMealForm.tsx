@@ -11,7 +11,7 @@ const CreateMealForm: React.FC<AuthenticationProps> = ({ user }) => {
     imageUrl: "",
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+//Todo: add validation so the chef cannot create a meal without adding imageUrl
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
