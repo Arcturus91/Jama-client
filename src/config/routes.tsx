@@ -7,6 +7,7 @@ import {
   UpdateChefPage,
   UserPage,
   UpdateUserPage,
+  AdminPage,
 } from "../pages";
 import MealDetailPage from "../pages/MealDetailPage";
 import SignUpPage from "../pages/SignUpPage";
@@ -46,6 +47,10 @@ const routes = (props: RoutesProps) => {
     {
       path:"/chef/updatemeal/:id",
       element: <UpdateMealPage {...props}/>
+    },
+    {
+      path: "/adminpage",
+      element: <AdminPage {...props} />,
     },
     {path: "*",
       element:<NotFoundPage/>}

@@ -6,7 +6,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const { user } = props;
   const [open, setOpen] = useState(false);
 
-  console.log(user);
+  console.log("user en navbar", user);
   return (
     <nav className="bg-white shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +44,14 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                   Chef 👨‍🍳
                 </Link>
               )}
-
+              {user?.type === "admin" && (
+                <Link
+                  to={`/adminpage`}
+                  className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Admin💼
+                </Link>
+              )}
               <Link
                 to="/contact"
                 className="text-gray-800 hover:text-black sm:px-2 md:px-3 py-2 rounded-md text-sm font-medium"

@@ -95,6 +95,7 @@ const LogInForm: React.FC<AuthenticationProps> = ({ authentication }) => {
             <option value="">Select type...</option>
             <option value="user">User</option>
             <option value="chef">Chef</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
         <button
