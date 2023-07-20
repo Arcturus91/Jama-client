@@ -44,7 +44,7 @@ const AdminPage: React.FC<AuthenticationProps> = (props) => {
         </div>
       </div>
       <div>
-        <h2 className="text-lg font-semibold mb-2">Órdenes Pendientes:</h2>
+        <h2 className="text-lg font-semibold mb-2">Órdenes Pendientes de Entrega:</h2>
         <PendingOrdersTable pendingOrders={pendingOrders} />
       </div>
     </div>
